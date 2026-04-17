@@ -1,50 +1,71 @@
 import { Link, NavLink } from "react-router-dom";
-import { Search, ShoppingBag, Menu, X } from "lucide-react";
+import { Menu, X, ShoppingBag } from "lucide-react";
 import { useState } from "react";
+import { OrderDialog } from "./OrderDialog";
 
 const links = [
-  { to: "/store", label: "All Drinks" },
-  { to: "/mango", label: "Mango" },
-  { to: "/mixed-fruit", label: "Mixed Fruit" },
-  { to: "/yogurt", label: "Yogurt" },
-  { to: "/water", label: "Pure Water" },
-  { to: "/about", label: "About" },
-  { to: "/support", label: "Support" },
+  { to: "/", label: "Home" },
+  { to: "/store", label: "Our Drinks" },
+  { to: "/about", label: "Our Story" },
+  { to: "/support", label: "Contact" },
 ];
 
 export const TopNav = () => {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-50 nav-blur border-b border-border/40">
-      <nav className="mx-auto flex h-12 max-w-[1024px] items-center justify-between px-6 text-[12px] text-foreground/90">
-        <Link to="/" aria-label="KK Drinks home" className="flex items-center font-bold tracking-tight text-base">
-          KK
+    <header className="sticky top-0 z-40 nav-blur border-b border-white/5">
+      <nav className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-6 text-[13px] text-white/90">
+        <Link to="/" aria-label="KK Drinks home" className="flex items-center gap-2">
+          <span className="display text-2xl text-[hsl(var(--sun))]">KK</span>
+          <span className="hidden sm:inline text-[10px] tracking-[0.3em] uppercase opacity-70">Sierra Leone</span>
         </Link>
-        <ul className="hidden md:flex items-center gap-7">
+        <ul className="hidden md:flex items-center gap-9 tracking-[0.15em] uppercase text-[11px] font-semibold">
           {links.map((l) => (
             <li key={l.label}>
-              <NavLink to={l.to} className="opacity-80 hover:opacity-100 transition-opacity">
+              <NavLink
+                to={l.to}
+                className={({ isActive }) =>
+                  `transition-colors hover:text-[hsl(var(--sun))] ${isActive ? "text-[hsl(var(--sun))]" : "opacity-90"}`
+                }
+                end={l.to === "/"}
+              >
                 {l.label}
               </NavLink>
             </li>
           ))}
         </ul>
-        <div className="hidden md:flex items-center gap-6">
-          <button aria-label="Search" className="opacity-80 hover:opacity-100"><Search size={14} /></button>
-          <Link to="/store" aria-label="Bag" className="opacity-80 hover:opacity-100"><ShoppingBag size={14} /></Link>
+        <div className="hidden md:flex items-center gap-3">
+          <OrderDialog
+            trigger={
+              <button className="flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase bg-[hsl(var(--sun))] text-[hsl(var(--wood))] rounded-full px-4 py-2 hover:scale-[1.03] transition-transform">
+                <ShoppingBag className="h-3.5 w-3.5" /> Order
+              </button>
+            }
+          />
         </div>
-        <button onClick={() => setOpen(!open)} className="md:hidden" aria-label="Menu">
-          {open ? <X size={18} /> : <Menu size={18} />}
+        <button onClick={() => setOpen(!open)} className="md:hidden text-white" aria-label="Menu">
+          {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </nav>
       {open && (
-        <div className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur">
-          <ul className="flex flex-col px-6 py-4 gap-4 text-base">
+        <div className="md:hidden border-t border-white/10 bg-[hsl(var(--wood))]">
+          <ul className="flex flex-col px-6 py-4 gap-4 text-base text-white">
             {links.map((l) => (
               <li key={l.label}>
-                <NavLink to={l.to} onClick={() => setOpen(false)} className="block">{l.label}</NavLink>
+                <NavLink to={l.to} onClick={() => setOpen(false)} className="block">
+                  {l.label}
+                </NavLink>
               </li>
             ))}
+            <li className="pt-2">
+              <OrderDialog
+                trigger={
+                  <button className="w-full bg-[hsl(var(--sun))] text-[hsl(var(--wood))] rounded-full py-3 text-sm font-bold uppercase tracking-[0.2em]">
+                    Order Now
+                  </button>
+                }
+              />
+            </li>
           </ul>
         </div>
       )}
