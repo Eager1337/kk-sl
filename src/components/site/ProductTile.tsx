@@ -23,7 +23,7 @@ export const ProductTile = ({
   primaryHref = "#",
   primaryLabel = "Learn more",
   secondaryHref = "#",
-  secondaryLabel = "Buy",
+  secondaryLabel = "Coming soon",
   variant = "light",
   size = "full",
   textPosition = "top",
@@ -43,12 +43,12 @@ export const ProductTile = ({
           <Link to={primaryHref} className="pill-link">
             {primaryLabel} <ChevronRight size={14} />
           </Link>
-          <Link
-            to={secondaryHref}
-            className={`btn-pill ${dark ? "bg-background text-foreground" : "bg-accent text-accent-foreground"}`}
+          <span
+            className={`btn-pill cursor-not-allowed opacity-90 ${dark ? "bg-background text-foreground" : "bg-accent text-accent-foreground"}`}
+            aria-disabled="true"
           >
             {secondaryLabel}
-          </Link>
+          </span>
         </div>
       </div>
       <div className={`flex-1 w-full flex items-end justify-center ${textPosition === "top" ? "" : "order-1"}`}>
@@ -56,7 +56,7 @@ export const ProductTile = ({
           src={image}
           alt={title}
           loading="lazy"
-          className="max-h-[380px] w-auto object-contain"
+          className="max-h-[380px] w-auto object-contain drop-shadow-xl"
         />
       </div>
     </article>

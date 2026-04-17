@@ -2,20 +2,20 @@ import { Link } from "react-router-dom";
 
 const groups = [
   {
-    title: "Shop and Learn",
-    items: ["Store", "Lumen Book", "Lumen Phone", "Lumen Watch", "Audio", "Tablet", "Accessories"],
+    title: "Our Drinks",
+    items: ["Mango Fruity", "Orange Fruity", "Mixed Fruit", "Apple Carbonated", "Tamarind Carbonated", "Pineapple Yogurt", "Pure Drink Water"],
   },
   {
-    title: "Account",
-    items: ["Manage Your Lumen ID", "Lumen Store Account", "Order Status", "Shopping Help"],
+    title: "Company",
+    items: ["About KK", "Our Story", "Sustainability", "Careers", "Press"],
   },
   {
-    title: "Lumen Services",
-    items: ["Lumen One", "Lumen Cloud+", "Lumen Music", "Lumen TV", "Lumen Pay"],
+    title: "For Business",
+    items: ["Wholesale", "Distributors", "Become a Stockist", "Bulk Orders"],
   },
   {
-    title: "About Lumen",
-    items: ["Newsroom", "Leadership", "Career Opportunities", "Investors", "Ethics & Compliance", "Contact"],
+    title: "Support",
+    items: ["Contact Us", "FAQs", "Quality & Safety", "Find a Shop", "Report an Issue"],
   },
 ];
 
@@ -23,11 +23,11 @@ export const Footer = () => (
   <footer className="bg-subtle text-[12px] text-muted-foreground">
     <div className="mx-auto max-w-[1024px] px-6 py-8 space-y-6">
       <p className="border-b border-border pb-5 leading-relaxed">
-        A monthly trade-in payment example. Pricing based on a 24-month term and includes credit towards a new device.
-        Final terms vary based on credit standing and product configuration. See your local Lumen retailer for details.
+        Online ordering is coming soon. All prices shown are recommended retail in Sierra Leonean Leones (Le). Prices may
+        vary by stockist and region.
       </p>
       <p className="border-b border-border pb-5 leading-relaxed">
-        Lumen is a placeholder brand created for design demonstration purposes only. No affiliation with any real company.
+        KK Drinks is proudly produced in Sierra Leone. NAFDAC and SLSB approved manufacturing.
       </p>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pb-6 border-b border-border">
         {groups.map((g) => (
@@ -42,7 +42,7 @@ export const Footer = () => (
         ))}
       </div>
       <div className="flex flex-col md:flex-row md:justify-between gap-3">
-        <span>Copyright © {new Date().getFullYear()} Lumen Demo Inc. All rights reserved.</span>
+        <span>Copyright © {new Date().getFullYear()} KK Drinks Sierra Leone. All rights reserved.</span>
         <div className="flex gap-4">
           <Link to="#" className="hover:underline">Privacy Policy</Link>
           <Link to="#" className="hover:underline">Terms of Use</Link>

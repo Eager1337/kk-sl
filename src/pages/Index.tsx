@@ -1,59 +1,100 @@
 import { Layout } from "@/components/site/Layout";
 import { ProductTile } from "@/components/site/ProductTile";
-import phone from "@/assets/phone.jpg";
-import laptop from "@/assets/laptop.jpg";
-import watch from "@/assets/watch.jpg";
-import buds from "@/assets/buds.jpg";
-import tablet from "@/assets/tablet.jpg";
+import mango from "@/assets/kk-mango.jpeg";
+import mixed from "@/assets/kk-mixed-fruit.jpeg";
+import orange from "@/assets/kk-orange.jpeg";
+import apple from "@/assets/kk-apple.jpeg";
+import tamarind from "@/assets/kk-tamarind.jpeg";
+import yogurt from "@/assets/kk-pineapple-yogurt.jpeg";
+import water from "@/assets/kk-water.jpeg";
+import lineup from "@/assets/kk-lineup.jpeg";
 
 const Index = () => {
   return (
     <Layout>
       {/* Promo strip */}
       <div className="bg-subtle py-3 text-center text-sm text-muted-foreground">
-        Get up to 12 months of free Lumen Cloud+ when you buy a Lumen device.{" "}
-        <a className="pill-link" href="#">Learn more</a>
+        Online ordering is coming soon. Find KK Drinks at shops across Sierra Leone today.{" "}
+        <a className="pill-link" href="/about">Learn more</a>
       </div>
 
       <div className="space-y-2 py-2 bg-background">
         <ProductTile
           eyebrow="New"
-          title="Lumen Phone 16 Pro"
-          tagline="Engineered for the next decade. Built to last forever."
-          image={phone}
+          title="KK Mango Fruity"
+          tagline="The taste of sunshine. Bottled in Sierra Leone."
+          image={mango}
+          primaryHref="/mango"
           primaryLabel="Learn more"
-          secondaryLabel="Buy"
+          secondaryLabel="Le 10 · Coming soon"
         />
 
         <ProductTile
-          title="Lumen Book Air"
-          tagline="Speed of thought. Battery of legend."
-          image={laptop}
+          title="KK Mixed Fruit"
+          tagline="Berry. Bold. Brilliantly refreshing."
+          image={mixed}
+          primaryHref="/mixed-fruit"
+          secondaryLabel="Le 10 · Coming soon"
           variant="dark"
         />
 
         <div className="grid md:grid-cols-2 gap-2">
           <ProductTile
-            title="Lumen Watch"
-            tagline="A healthier you, on the go."
-            image={watch}
+            title="KK Orange Fruity"
+            tagline="Pure citrus joy."
+            image={orange}
+            primaryHref="/store"
+            secondaryLabel="Le 10 · Coming soon"
             size="half"
           />
           <ProductTile
-            title="Lumen Buds Pro"
-            tagline="Sound, sculpted for you."
-            image={buds}
+            title="KK Apple Soda"
+            tagline="Crisp, carbonated, classic."
+            image={apple}
+            primaryHref="/store"
+            secondaryLabel="Le 10 · Coming soon"
+            size="half"
+          />
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-2">
+          <ProductTile
+            title="KK Tamarind Soda"
+            tagline="Tangy. Spicy. Unmistakable."
+            image={tamarind}
+            primaryHref="/store"
+            secondaryLabel="Le 10 · Coming soon"
             size="half"
             variant="dark"
+          />
+          <ProductTile
+            title="KK Pineapple Yogurt"
+            tagline="Creamy meets tropical."
+            image={yogurt}
+            primaryHref="/yogurt"
+            secondaryLabel="Le 10 · Coming soon"
+            size="half"
           />
         </div>
 
         <ProductTile
-          title="Lumen Tablet"
-          tagline="Your canvas. Reimagined."
-          image={tablet}
+          title="KK Pure Drink Water"
+          tagline="Hydration, perfected. 1500ml of pure refreshment."
+          image={water}
+          primaryHref="/water"
+          secondaryLabel="Le 10 · Coming soon"
           textPosition="bottom"
         />
+
+        {/* Family lineup */}
+        <section className="bg-card text-center px-6 py-20">
+          <p className="text-xs font-semibold tracking-widest uppercase opacity-70 mb-2">The KK Family</p>
+          <h2 className="display text-4xl md:text-5xl mb-3">One brand. Every flavour you love.</h2>
+          <p className="text-lg opacity-80 max-w-2xl mx-auto mb-10">
+            From pure drinking water to creamy yogurt beverages and bold carbonated sodas — there's a KK for every moment.
+          </p>
+          <img src={lineup} alt="The full KK Drinks family lineup" className="mx-auto max-h-[480px] w-auto object-contain rounded-2xl" />
+        </section>
       </div>
     </Layout>
   );
