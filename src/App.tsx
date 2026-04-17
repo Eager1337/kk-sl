@@ -5,11 +5,13 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
-import Phone from "./pages/Phone.tsx";
-import Laptop from "./pages/Laptop.tsx";
-import Watch from "./pages/Watch.tsx";
+import Mango from "./pages/Mango.tsx";
+import MixedFruit from "./pages/MixedFruit.tsx";
+import Yogurt from "./pages/Yogurt.tsx";
+import Water from "./pages/Water.tsx";
 import Store from "./pages/Store.tsx";
 import Support from "./pages/Support.tsx";
+import About from "./pages/About.tsx";
 
 const queryClient = new QueryClient();
 
@@ -21,10 +23,12 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/phone" element={<Phone />} />
-          <Route path="/laptop" element={<Laptop />} />
-          <Route path="/watch" element={<Watch />} />
+          <Route path="/mango" element={<Mango />} />
+          <Route path="/mixed-fruit" element={<MixedFruit />} />
+          <Route path="/yogurt" element={<Yogurt />} />
+          <Route path="/water" element={<Water />} />
           <Route path="/store" element={<Store />} />
+          <Route path="/about" element={<About />} />
           <Route path="/support" element={<Support />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
