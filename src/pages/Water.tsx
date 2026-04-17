@@ -1,12 +1,9 @@
 import { DrinkPage } from "@/components/site/DrinkPage";
-import img from "@/assets/kk-water.jpeg";
+import { getDrink } from "@/data/drinks";
 
 const Water = () => (
   <DrinkPage
-    eyebrow="Essential"
-    name="KK Pure Drink Water"
-    tagline="Hydration, perfected."
-    image={img}
+    drink={getDrink("water")!}
     highlight={{
       title: "Pure. Clean. Trusted.",
       body: "Filtered through a multi-stage purification process for the cleanest, crispest taste — the water you can trust every day.",
@@ -22,5 +19,4 @@ const Water = () => (
     ]}
   />
 );
-
 export default Water;

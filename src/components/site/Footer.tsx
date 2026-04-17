@@ -1,53 +1,49 @@
 import { Link } from "react-router-dom";
-
-const groups = [
-  {
-    title: "Our Drinks",
-    items: ["Mango Fruity", "Orange Fruity", "Mixed Fruit", "Apple Carbonated", "Tamarind Carbonated", "Pineapple Yogurt", "Pure Drink Water"],
-  },
-  {
-    title: "Company",
-    items: ["About KK", "Our Story", "Sustainability", "Careers", "Press"],
-  },
-  {
-    title: "For Business",
-    items: ["Wholesale", "Distributors", "Become a Stockist", "Bulk Orders"],
-  },
-  {
-    title: "Support",
-    items: ["Contact Us", "FAQs", "Quality & Safety", "Find a Shop", "Report an Issue"],
-  },
-];
+import { Instagram, Facebook, MapPin, Phone, Mail } from "lucide-react";
 
 export const Footer = () => (
-  <footer className="bg-subtle text-[12px] text-muted-foreground">
-    <div className="mx-auto max-w-[1024px] px-6 py-8 space-y-6">
-      <p className="border-b border-border pb-5 leading-relaxed">
-        Online ordering is coming soon. All prices shown are recommended retail in Sierra Leonean Leones (Le). Prices may
-        vary by stockist and region.
-      </p>
-      <p className="border-b border-border pb-5 leading-relaxed">
-        KK Drinks is proudly produced in Sierra Leone. NAFDAC and SLSB approved manufacturing.
-      </p>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pb-6 border-b border-border">
-        {groups.map((g) => (
-          <div key={g.title}>
-            <h4 className="text-foreground font-semibold mb-3">{g.title}</h4>
-            <ul className="space-y-2">
-              {g.items.map((i) => (
-                <li key={i}><Link to="/store" className="hover:underline">{i}</Link></li>
-              ))}
-            </ul>
-          </div>
-        ))}
+  <footer className="bg-[hsl(var(--wood))] text-white/80 text-sm">
+    <div className="torn-top h-12 bg-[hsl(var(--paper))]" aria-hidden />
+    <div className="mx-auto max-w-[1200px] px-6 py-14 grid md:grid-cols-4 gap-10">
+      <div className="md:col-span-2 space-y-3">
+        <div className="display text-3xl text-[hsl(var(--sun))]">KK Drinks</div>
+        <p className="text-white/70 max-w-sm leading-relaxed">
+          Bottled with love in Sierra Leone. Refreshment crafted for every moment — from family gatherings to a quiet break.
+        </p>
+        <div className="flex gap-3 pt-2">
+          <a href="#" aria-label="Instagram" className="h-9 w-9 rounded-full border border-white/20 flex items-center justify-center hover:bg-[hsl(var(--sun))] hover:text-[hsl(var(--wood))] hover:border-[hsl(var(--sun))] transition"><Instagram className="h-4 w-4" /></a>
+          <a href="#" aria-label="Facebook" className="h-9 w-9 rounded-full border border-white/20 flex items-center justify-center hover:bg-[hsl(var(--sun))] hover:text-[hsl(var(--wood))] hover:border-[hsl(var(--sun))] transition"><Facebook className="h-4 w-4" /></a>
+        </div>
       </div>
-      <div className="flex flex-col md:flex-row md:justify-between gap-3">
-        <span>Copyright © {new Date().getFullYear()} KK Drinks Sierra Leone. All rights reserved.</span>
-        <div className="flex gap-4">
-          <Link to="#" className="hover:underline">Privacy Policy</Link>
-          <Link to="#" className="hover:underline">Terms of Use</Link>
-          <Link to="#" className="hover:underline">Sales Policy</Link>
-          <Link to="#" className="hover:underline">Site Map</Link>
+
+      <div>
+        <h4 className="eyebrow text-[hsl(var(--sun))] mb-4">Drinks</h4>
+        <ul className="space-y-2">
+          <li><Link to="/mango" className="hover:text-white transition">Mango Fruity</Link></li>
+          <li><Link to="/mixed-fruit" className="hover:text-white transition">Mixed Fruit</Link></li>
+          <li><Link to="/yogurt" className="hover:text-white transition">Pineapple Yogurt</Link></li>
+          <li><Link to="/water" className="hover:text-white transition">Pure Water</Link></li>
+          <li><Link to="/store" className="hover:text-white transition">All drinks →</Link></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 className="eyebrow text-[hsl(var(--sun))] mb-4">Contact</h4>
+        <ul className="space-y-2 text-white/70">
+          <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 shrink-0" /> Freetown, Sierra Leone</li>
+          <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5 shrink-0" /> +232 00 000 000</li>
+          <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 shrink-0" /> hello@kkdrinks.sl</li>
+        </ul>
+      </div>
+    </div>
+
+    <div className="border-t border-white/10">
+      <div className="mx-auto max-w-[1200px] px-6 py-5 flex flex-col md:flex-row md:justify-between gap-2 text-xs text-white/60">
+        <span>© {new Date().getFullYear()} KK Drinks Sierra Leone. NAFDAC & SLSB approved.</span>
+        <div className="flex gap-5">
+          <Link to="#" className="hover:text-white">Privacy</Link>
+          <Link to="#" className="hover:text-white">Terms</Link>
+          <Link to="#" className="hover:text-white">Stockists</Link>
         </div>
       </div>
     </div>

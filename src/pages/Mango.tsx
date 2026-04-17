@@ -1,17 +1,14 @@
 import { DrinkPage } from "@/components/site/DrinkPage";
-import img from "@/assets/kk-mango.jpeg";
+import { getDrink } from "@/data/drinks";
 
 const Mango = () => (
   <DrinkPage
-    eyebrow="Bestseller"
-    name="KK Mango Fruity"
-    tagline="The taste of sunshine. Bottled."
-    image={img}
+    drink={getDrink("mango")!}
     highlight={{
       title: "Sweet, smooth, unmistakably mango.",
       body: "Bursting with the warm, ripe flavour of West African mangoes, KK Mango Fruity is a refreshing soft drink the whole family can enjoy.",
     }}
-    description="Made in Sierra Leone with care, KK Mango Fruity is bottled fresh in our facility and distributed across the country."
+    description="Made in Sierra Leone with care, KK Mango Fruity is bottled fresh in our Freetown facility and delivered across the country."
     specs={[
       { k: "Flavour", v: "Mango" },
       { k: "Type", v: "Fruity Soft Drink" },
@@ -22,5 +19,4 @@ const Mango = () => (
     ]}
   />
 );
-
 export default Mango;

@@ -1,12 +1,9 @@
 import { DrinkPage } from "@/components/site/DrinkPage";
-import img from "@/assets/kk-mixed-fruit.jpeg";
+import { getDrink } from "@/data/drinks";
 
 const MixedFruit = () => (
   <DrinkPage
-    eyebrow="Bold flavour"
-    name="KK Mixed Fruit"
-    tagline="Berry. Bold. Brilliantly refreshing."
-    image={img}
+    drink={getDrink("mixed-fruit")!}
     highlight={{
       title: "A symphony of fruits in every sip.",
       body: "Strawberry, blueberry, blackberry and raspberry come together in a deep, rich blend that's like no other soft drink.",
@@ -22,5 +19,4 @@ const MixedFruit = () => (
     ]}
   />
 );
-
 export default MixedFruit;

@@ -1,52 +1,72 @@
 import { Layout } from "@/components/site/Layout";
+import { SpinBottle } from "@/components/site/SpinBottle";
+import { OrderDialog } from "@/components/site/OrderDialog";
 import { Link } from "react-router-dom";
+import wood from "@/assets/wood-bg.jpg";
+import type { Drink } from "@/data/drinks";
 
 interface DrinkPageProps {
-  eyebrow?: string;
-  name: string;
-  tagline: string;
-  image: string;
+  drink: Drink;
   description: string;
   highlight: { title: string; body: string };
   specs: { k: string; v: string }[];
 }
 
-export const DrinkPage = ({ eyebrow, name, tagline, image, description, highlight, specs }: DrinkPageProps) => (
+export const DrinkPage = ({ drink, description, highlight, specs }: DrinkPageProps) => (
   <Layout>
-    <section className="bg-subtle py-20 text-center px-6">
-      {eyebrow && <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-3">{eyebrow}</p>}
-      <h1 className="display text-5xl md:text-7xl">{name}</h1>
-      <p className="mt-4 text-xl md:text-2xl text-muted-foreground">{tagline}</p>
-      <div className="flex justify-center gap-4 mt-6 items-center">
-        <span className="btn-pill bg-accent text-accent-foreground px-6 opacity-90 cursor-not-allowed">Le 10 · Coming soon</span>
-        <Link to="/store" className="pill-link">View all drinks ›</Link>
-      </div>
-      <img src={image} alt={name} className="mx-auto mt-12 max-h-[600px] object-contain drop-shadow-2xl" />
-    </section>
-
-    <section className="py-24 px-6 max-w-4xl mx-auto text-center">
-      <h2 className="display text-4xl md:text-5xl">{highlight.title}</h2>
-      <p className="mt-6 text-lg text-muted-foreground">{highlight.body}</p>
-    </section>
-
-    <section className="bg-foreground text-background py-24 px-6">
-      <div className="max-w-4xl mx-auto text-center space-y-3">
-        <p className="text-xs font-semibold tracking-widest uppercase opacity-70">Made in Sierra Leone</p>
-        <h2 className="display text-4xl md:text-5xl">Crafted with care.</h2>
-        <p className="text-lg opacity-80 mt-4">{description}</p>
-      </div>
-    </section>
-
-    <section className="py-20 px-6 max-w-5xl mx-auto">
-      <h2 className="display text-3xl md:text-4xl text-center mb-10">Product Details</h2>
-      <dl className="grid md:grid-cols-2 gap-x-12 gap-y-4">
-        {specs.map((s) => (
-          <div key={s.k} className="flex justify-between border-b border-border py-3 text-sm">
-            <dt className="font-medium">{s.k}</dt>
-            <dd className="text-muted-foreground text-right">{s.v}</dd>
+    {/* Hero */}
+    <section
+      className="relative -mt-16 pt-32 pb-20 px-6 overflow-hidden"
+      style={{ backgroundImage: `linear-gradient(180deg, hsla(22,35%,8%,0.55), hsla(22,35%,12%,0.75)), url(${wood})`, backgroundSize: "cover" }}
+    >
+      <div className="mx-auto max-w-[1200px] grid md:grid-cols-2 gap-10 items-center text-white">
+        <div className="fade-up">
+          <p className="eyebrow text-[hsl(var(--sun))]">{drink.category} · {drink.volume}</p>
+          <h1 className="display text-5xl md:text-7xl mt-4 mb-4">{drink.name}</h1>
+          <p className="text-xl md:text-2xl text-white/80 italic">{drink.tagline}</p>
+          <div className="flex flex-wrap gap-3 mt-7 items-center">
+            <OrderDialog initialDrink={drink} trigger={<button className="btn-pill bg-[hsl(var(--sun))] text-[hsl(var(--wood))]">Order · Le {drink.price}</button>} />
+            <Link to="/store" className="btn-pill bg-white/10 text-white border border-white/20 backdrop-blur">All drinks</Link>
           </div>
-        ))}
-      </dl>
+        </div>
+        <div className="h-[520px] flex items-center justify-center fade-up" style={{ animationDelay: "0.15s" }}>
+          <div className="w-[70%] max-w-[340px]">
+            <SpinBottle src={drink.image} alt={drink.name} glow={`hsl(${drink.accent})`} priority />
+          </div>
+        </div>
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 h-12 bg-[hsl(var(--paper))] torn-top" aria-hidden />
+    </section>
+
+    {/* Highlight */}
+    <section className="paper-bg py-24 px-6 text-center">
+      <h2 className="display text-4xl md:text-5xl max-w-3xl mx-auto">{highlight.title}</h2>
+      <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">{highlight.body}</p>
+    </section>
+
+    {/* Made in SL */}
+    <section className="bg-[hsl(var(--wood))] text-white py-20 px-6 text-center">
+      <p className="eyebrow text-[hsl(var(--sun))] opacity-90">Made in Sierra Leone</p>
+      <h2 className="display text-4xl md:text-5xl mt-3 mb-5">Crafted with care.</h2>
+      <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">{description}</p>
+    </section>
+
+    {/* Specs */}
+    <section className="paper-bg py-20 px-6">
+      <div className="mx-auto max-w-3xl">
+        <h2 className="display text-3xl md:text-4xl text-center mb-10">Product details</h2>
+        <dl className="grid sm:grid-cols-2 gap-x-12 gap-y-3">
+          {specs.map((s) => (
+            <div key={s.k} className="flex justify-between border-b border-kraft py-3 text-sm">
+              <dt className="font-semibold">{s.k}</dt>
+              <dd className="text-muted-foreground text-right">{s.v}</dd>
+            </div>
+          ))}
+        </dl>
+        <div className="text-center mt-12">
+          <OrderDialog initialDrink={drink} trigger={<button className="btn-brush">Order · Le {drink.price}</button>} />
+        </div>
+      </div>
     </section>
   </Layout>
 );

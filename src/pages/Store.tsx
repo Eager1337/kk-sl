@@ -1,40 +1,44 @@
 import { Layout } from "@/components/site/Layout";
-import mango from "@/assets/kk-mango.jpeg";
-import mixed from "@/assets/kk-mixed-fruit.jpeg";
-import orange from "@/assets/kk-orange.jpeg";
-import apple from "@/assets/kk-apple.jpeg";
-import tamarind from "@/assets/kk-tamarind.jpeg";
-import yogurt from "@/assets/kk-pineapple-yogurt.jpeg";
-import water from "@/assets/kk-water.jpeg";
-
-const items = [
-  { name: "KK Mango Fruity Soft Drink", size: "500ml", img: mango },
-  { name: "KK Orange Fruity Soft Drink", size: "500ml", img: orange },
-  { name: "KK Mixed Fruit Soft Drink", size: "500ml", img: mixed },
-  { name: "KK Carbonated Apple Soft Drink", size: "500ml", img: apple },
-  { name: "KK Carbonated Tamarind Soft Drink", size: "500ml", img: tamarind },
-  { name: "KK Pineapple Yogurt Beverage", size: "500ml", img: yogurt },
-  { name: "KK Pure Drink Water", size: "1500ml", img: water },
-];
+import { SpinBottle } from "@/components/site/SpinBottle";
+import { OrderDialog } from "@/components/site/OrderDialog";
+import { DRINKS } from "@/data/drinks";
+import { Link } from "react-router-dom";
 
 const Store = () => (
   <Layout>
-    <section className="px-6 py-16 max-w-[1024px] mx-auto">
-      <h1 className="display text-5xl md:text-6xl mb-2">All Drinks.</h1>
-      <p className="text-2xl text-muted-foreground">Every KK flavour, in one place. Le 10 each.</p>
-      <p className="text-sm text-muted-foreground mt-3">
-        Online ordering coming soon. Available at shops across Sierra Leone.
+    <section className="paper-bg py-20 px-6 text-center">
+      <p className="eyebrow text-[hsl(var(--sea))]">All KK Drinks</p>
+      <h1 className="display text-5xl md:text-6xl mt-3">Pick your favourite.</h1>
+      <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
+        Seven distinct flavours. One simple price — <span className="font-semibold text-foreground">Le 10</span> per bottle.
       </p>
     </section>
-    <section className="px-6 pb-24 max-w-[1024px] mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {items.map((p) => (
-        <article key={p.name} className="bg-card rounded-2xl p-6 flex flex-col items-center text-center min-h-[420px]">
-          <img src={p.img} alt={p.name} loading="lazy" className="h-56 object-contain mb-6" />
-          <h3 className="text-base font-semibold leading-tight">{p.name}</h3>
-          <p className="text-muted-foreground text-sm mt-1">{p.size} · Le 10</p>
-          <span className="btn-pill bg-accent text-accent-foreground mt-auto opacity-80 cursor-not-allowed">Coming soon</span>
-        </article>
-      ))}
+
+    <section className="paper-bg pb-24 px-6">
+      <div className="mx-auto max-w-[1200px] grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {DRINKS.map((d, i) => (
+          <article key={d.slug} className="bg-white rounded-2xl p-6 pt-10 shadow-md hover:shadow-2xl transition-shadow">
+            <div className="h-72 flex items-end">
+              <SpinBottle src={d.image} alt={d.name} glow={`hsl(${d.accent})`} speed={i % 2 === 0 ? "normal" : "slow"} />
+            </div>
+            <div className="text-center mt-6 space-y-1">
+              <p className="eyebrow text-[hsl(var(--sea))]">{d.category}</p>
+              <h3 className="display text-2xl">{d.short}</h3>
+              <p className="text-sm text-muted-foreground">{d.tagline}</p>
+              <p className="text-xs text-muted-foreground/80">{d.volume}</p>
+            </div>
+            <div className="flex items-center justify-between gap-3 mt-5">
+              <span className="display text-2xl">Le {d.price}</span>
+              <OrderDialog initialDrink={d} trigger={<button className="btn-brush text-[10px]">Order</button>} />
+            </div>
+            {d.href && (
+              <Link to={d.href} className="block text-center text-xs text-[hsl(var(--sea))] mt-3 hover:underline">
+                Learn more →
+              </Link>
+            )}
+          </article>
+        ))}
+      </div>
     </section>
   </Layout>
 );
