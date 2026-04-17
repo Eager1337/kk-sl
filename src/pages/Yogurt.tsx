@@ -1,12 +1,9 @@
 import { DrinkPage } from "@/components/site/DrinkPage";
-import img from "@/assets/kk-pineapple-yogurt.jpeg";
+import { getDrink } from "@/data/drinks";
 
 const Yogurt = () => (
   <DrinkPage
-    eyebrow="Creamy"
-    name="KK Pineapple Yogurt"
-    tagline="Creamy meets tropical."
-    image={img}
+    drink={getDrink("yogurt")!}
     highlight={{
       title: "Smooth pineapple, with a yogurt finish.",
       body: "A creamy yogurt-based beverage with the sweet, sun-ripened flavour of pineapple. Refreshing, satisfying and totally unique.",
@@ -22,5 +19,4 @@ const Yogurt = () => (
     ]}
   />
 );
-
 export default Yogurt;
