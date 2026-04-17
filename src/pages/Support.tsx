@@ -2,34 +2,35 @@ import { Layout } from "@/components/site/Layout";
 import { Search } from "lucide-react";
 
 const topics = [
-  "Lumen Phone", "Lumen Book", "Lumen Watch", "Lumen Buds",
-  "Tablet", "Lumen ID & Password", "Billing & Subscriptions", "Repair",
+  { title: "Where to buy", body: "Find KK Drinks at shops and supermarkets across Sierra Leone." },
+  { title: "Wholesale & distribution", body: "Become a stockist or distributor of the KK family of drinks." },
+  { title: "Product safety", body: "All KK products are made under NAFDAC and SLSB approved standards." },
+  { title: "Online orders", body: "Online ordering is coming soon. Sign up to be the first to know." },
+  { title: "Report an issue", body: "Found a problem with a bottle? Let us know and we'll make it right." },
+  { title: "Careers", body: "Join the team building Sierra Leone's favourite drinks brand." },
 ];
 
 const Support = () => (
   <Layout>
     <section className="bg-subtle py-20 text-center px-6">
-      <h1 className="display text-5xl md:text-6xl">Lumen Support</h1>
-      <p className="mt-4 text-xl text-muted-foreground">We're here to help.</p>
-      <div className="mt-8 max-w-xl mx-auto relative">
-        <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+      <h1 className="display text-5xl md:text-6xl">KK Support</h1>
+      <p className="mt-4 text-xl text-muted-foreground">How can we help you today?</p>
+      <div className="mx-auto mt-8 max-w-xl flex items-center bg-background rounded-full px-5 py-3 shadow-sm">
+        <Search size={16} className="text-muted-foreground" />
         <input
-          type="search"
-          placeholder="Search support"
-          className="w-full rounded-full border border-border bg-background pl-12 pr-5 py-3 text-base focus:outline-none focus:ring-2 focus:ring-ring"
+          className="bg-transparent outline-none w-full ml-3 text-sm"
+          placeholder="Search for help with KK Drinks"
         />
       </div>
     </section>
-    <section className="max-w-[1024px] mx-auto px-6 py-16">
-      <h2 className="display text-3xl mb-8">Browse by topic</h2>
-      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-3">
-        {topics.map((t) => (
-          <a key={t} href="#" className="bg-card rounded-2xl p-6 hover:bg-muted transition-colors">
-            <h3 className="font-medium">{t}</h3>
-            <p className="text-sm text-muted-foreground mt-1">Get help & guides</p>
-          </a>
-        ))}
-      </div>
+
+    <section className="py-20 px-6 max-w-[1024px] mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {topics.map((t) => (
+        <article key={t.title} className="bg-card rounded-2xl p-8 min-h-[200px]">
+          <h3 className="text-lg font-semibold mb-2">{t.title}</h3>
+          <p className="text-muted-foreground text-sm leading-relaxed">{t.body}</p>
+        </article>
+      ))}
     </section>
   </Layout>
 );

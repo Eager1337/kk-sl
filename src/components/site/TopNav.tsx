@@ -3,12 +3,12 @@ import { Search, ShoppingBag, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 const links = [
-  { to: "/store", label: "Store" },
-  { to: "/laptop", label: "Lumen Book" },
-  { to: "/phone", label: "Lumen Phone" },
-  { to: "/watch", label: "Lumen Watch" },
-  { to: "/store", label: "Audio" },
-  { to: "/store", label: "Tablet" },
+  { to: "/store", label: "All Drinks" },
+  { to: "/mango", label: "Mango" },
+  { to: "/mixed-fruit", label: "Mixed Fruit" },
+  { to: "/yogurt", label: "Yogurt" },
+  { to: "/water", label: "Pure Water" },
+  { to: "/about", label: "About" },
   { to: "/support", label: "Support" },
 ];
 
@@ -17,12 +17,10 @@ export const TopNav = () => {
   return (
     <header className="sticky top-0 z-50 nav-blur border-b border-border/40">
       <nav className="mx-auto flex h-12 max-w-[1024px] items-center justify-between px-6 text-[12px] text-foreground/90">
-        <Link to="/" aria-label="Lumen home" className="flex items-center">
-          <svg width="18" height="22" viewBox="0 0 18 22" fill="currentColor" aria-hidden>
-            <path d="M9 2.2c.7-.9 1.9-1.6 3-1.6.1 1.2-.4 2.4-1.1 3.2-.7.9-1.9 1.6-3 1.5-.2-1.2.4-2.3 1.1-3.1zM12.6 6c-1.6-.1-3 .9-3.7.9-.8 0-1.9-.9-3.2-.8C4 6.2 2.5 7.2 1.7 8.7c-1.7 3-.4 7.5 1.2 10 .8 1.2 1.7 2.5 3 2.5 1.2 0 1.6-.8 3.1-.8 1.4 0 1.8.8 3.1.8 1.3 0 2.1-1.2 2.9-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.5-.9-2.5-3.7 0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.7-3.2-1.8z"/>
-          </svg>
+        <Link to="/" aria-label="KK Drinks home" className="flex items-center font-bold tracking-tight text-base">
+          KK
         </Link>
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className="hidden md:flex items-center gap-7">
           {links.map((l) => (
             <li key={l.label}>
               <NavLink to={l.to} className="opacity-80 hover:opacity-100 transition-opacity">
