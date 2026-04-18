@@ -8,7 +8,7 @@ export const Footer = () => (
       <div className="md:col-span-2 space-y-3">
         <div className="display text-3xl text-[hsl(var(--sun))]">KK Drinks</div>
         <p className="text-white/70 max-w-sm leading-relaxed">
-          Bottled with love in Sierra Leone. Refreshment crafted for every moment — from family gatherings to a quiet break.
+          Bottled with love in Sierra Leone. Refreshment crafted for every moment · from family gatherings to a quiet break.
         </p>
         <div className="flex gap-3 pt-2">
           <a href="#" aria-label="Instagram" className="h-9 w-9 rounded-full border border-white/20 flex items-center justify-center hover:bg-[hsl(var(--sun))] hover:text-[hsl(var(--wood))] hover:border-[hsl(var(--sun))] transition"><Instagram className="h-4 w-4" /></a>
