@@ -17,37 +17,36 @@ const Index = () => {
     <Layout>
       {/* HERO · wood with three spinning bottles */}
       <section
-        className="relative -mt-16 pt-32 pb-20 md:pt-40 md:pb-28 px-6 overflow-hidden"
+        className="relative -mt-16 pt-28 pb-16 md:pt-36 md:pb-24 px-4 sm:px-6 overflow-hidden"
         style={{ backgroundImage: `linear-gradient(180deg, hsla(22,35%,8%,0.5), hsla(22,35%,12%,0.7)), url(${wood})`, backgroundSize: "cover", backgroundPosition: "center" }}
       >
-        <div className="mx-auto max-w-[1200px] grid md:grid-cols-2 gap-10 items-center">
-          <div className="order-2 md:order-1 text-white fade-up">
+        <div className="mx-auto max-w-[1200px] grid md:grid-cols-2 gap-8 md:gap-10 items-center">
+          <div className="order-2 md:order-1 text-white fade-up text-center md:text-left">
             <span className="eyebrow text-[hsl(var(--sun))]">KK Drinks · Estd. Sierra Leone</span>
-            <h1 className="display text-5xl md:text-7xl mt-4 mb-5">
+            <h1 className="display text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-4 mb-5">
               However refreshing you are,<br />
               <span className="italic text-[hsl(var(--sun))]">KK is more refreshing.</span>
             </h1>
-            <p className="text-base md:text-lg text-white/80 max-w-md leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg text-white/80 max-w-md mx-auto md:mx-0 leading-relaxed">
               Crafted in Freetown. Bottled with sunshine. Seven flavours, one unmistakable taste · every drink just <span className="font-semibold text-[hsl(var(--sun))]">Le 10</span>.
             </p>
-            <div className="flex flex-wrap gap-4 mt-8">
+            <div className="flex flex-wrap gap-3 mt-7 justify-center md:justify-start">
               <OrderDialog trigger={<button className="btn-pill bg-[hsl(var(--sun))] text-[hsl(var(--wood))]">Order Now · Le 10</button>} />
               <Link to="/store" className="btn-pill bg-white/10 text-white border border-white/20 backdrop-blur">Explore drinks</Link>
             </div>
           </div>
-          <div className="order-1 md:order-2 relative h-[440px] md:h-[560px] fade-up" style={{ animationDelay: "0.15s" }}>
-            <div className="absolute left-[8%] top-[18%] w-[36%] z-10 opacity-90">
+          <div className="order-1 md:order-2 relative h-[280px] sm:h-[340px] md:h-[440px] fade-up" style={{ animationDelay: "0.15s" }}>
+            <div className="absolute left-[6%] top-[20%] w-[26%] sm:w-[28%] z-10 opacity-90">
               <SpinBottle src={heroDrinks[0]!.image} alt={heroDrinks[0]!.name} speed="slow" glow="hsl(var(--mango))" priority />
             </div>
-            <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[44%] z-20">
+            <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[32%] sm:w-[34%] z-20">
               <SpinBottle src={heroDrinks[1]!.image} alt={heroDrinks[1]!.name} glow="hsl(var(--sun))" priority />
             </div>
-            <div className="absolute right-[8%] top-[22%] w-[34%] z-10 opacity-90">
+            <div className="absolute right-[6%] top-[24%] w-[24%] sm:w-[26%] z-10 opacity-90">
               <SpinBottle src={heroDrinks[2]!.image} alt={heroDrinks[2]!.name} speed="slow" glow="hsl(var(--sun))" priority />
             </div>
           </div>
         </div>
-        {/* torn paper bottom */}
         <div className="absolute bottom-0 left-0 right-0 h-12 bg-[hsl(var(--paper))] torn-top" aria-hidden />
       </section>
 
@@ -146,7 +145,7 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {sorten.map((d, i) => (
               <div key={d.slug} className="flex flex-col items-center fade-up" style={{ animationDelay: `${i * 0.1}s` }}>
-                <div className="w-full max-w-[240px] h-[360px] flex items-end">
+                <div className="w-full max-w-[170px] sm:max-w-[190px] h-[240px] sm:h-[280px] flex items-end">
                   <SpinBottle src={d.image} alt={d.name} glow={`hsl(${d.accent})`} speed={i % 2 === 0 ? "normal" : "slow"} />
                 </div>
                 <h3 className="display text-2xl mt-6">{d.short}</h3>
