@@ -15,7 +15,7 @@ const Index = () => {
 
   return (
     <Layout>
-      {/* HERO — wood with three spinning bottles */}
+      {/* HERO · wood with three spinning bottles */}
       <section
         className="relative -mt-16 pt-32 pb-20 md:pt-40 md:pb-28 px-6 overflow-hidden"
         style={{ backgroundImage: `linear-gradient(180deg, hsla(22,35%,8%,0.5), hsla(22,35%,12%,0.7)), url(${wood})`, backgroundSize: "cover", backgroundPosition: "center" }}
@@ -28,7 +28,7 @@ const Index = () => {
               <span className="italic text-[hsl(var(--sun))]">KK is more refreshing.</span>
             </h1>
             <p className="text-base md:text-lg text-white/80 max-w-md leading-relaxed">
-              Crafted in Freetown. Bottled with sunshine. Seven flavours, one unmistakable taste — every drink just <span className="font-semibold text-[hsl(var(--sun))]">Le 10</span>.
+              Crafted in Freetown. Bottled with sunshine. Seven flavours, one unmistakable taste · every drink just <span className="font-semibold text-[hsl(var(--sun))]">Le 10</span>.
             </p>
             <div className="flex flex-wrap gap-4 mt-8">
               <OrderDialog trigger={<button className="btn-pill bg-[hsl(var(--sun))] text-[hsl(var(--wood))]">Order Now · Le 10</button>} />
@@ -60,7 +60,7 @@ const Index = () => {
             { Icon: Truck, t: "Delivery available", s: "Order & pay on delivery" },
             { Icon: Sparkles, t: "Always Le 10", s: "One price. Every drink." },
           ].map(({ Icon, t, s }) => (
-            <div key={t} className="flex items-start gap-3">
+            <div key={t} className="trust-card flex items-start gap-3">
               <Icon className="h-6 w-6 text-[hsl(var(--sea))] shrink-0 mt-0.5" />
               <div>
                 <div className="font-semibold text-sm">{t}</div>
@@ -71,7 +71,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* KK ESTD section — Apple-tile style icons */}
+      {/* KK ESTD section · Apple-tile style icons */}
       <section className="paper-bg py-20 px-6 text-center">
         <p className="eyebrow text-[hsl(var(--sea))]">KK · Bottled in Sierra Leone</p>
         <h2 className="display text-4xl md:text-5xl mt-3 mb-12">Sip a little sunshine.</h2>
@@ -81,7 +81,7 @@ const Index = () => {
               <svg viewBox="0 0 64 64" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 8h6v8h-6zM36 8h6v8h-6zM18 16h28v40a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4z"/></svg>
             </div>
             <h3 className="eyebrow mb-2">Discover our flavours</h3>
-            <p className="text-sm text-muted-foreground max-w-xs mx-auto">Take a peek at our full range. Seven distinct drinks — there's a KK for every craving.</p>
+            <p className="text-sm text-muted-foreground max-w-xs mx-auto">Take a peek at our full range. Seven distinct drinks · there's a KK for every craving.</p>
           </div>
           <div>
             <div className="mx-auto h-20 mb-4 flex items-center justify-center text-[hsl(var(--sea))]">
@@ -95,13 +95,13 @@ const Index = () => {
               <svg viewBox="0 0 64 64" className="h-16 w-16" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8 16h48v32H8z"/><path d="M8 16l24 18 24-18"/></svg>
             </div>
             <h3 className="eyebrow mb-2">Want to stock KK?</h3>
-            <p className="text-sm text-muted-foreground max-w-xs mx-auto">Restaurants, hotels, kiosks — get in touch and bring KK to your customers.</p>
+            <p className="text-sm text-muted-foreground max-w-xs mx-auto">Restaurants, hotels, kiosks · get in touch and bring KK to your customers.</p>
           </div>
         </div>
         <Link to="/store" className="btn-brush mt-12">The Drinks</Link>
       </section>
 
-      {/* WOOD STRIP — polaroid story */}
+      {/* WOOD STRIP · polaroid story */}
       <section
         className="relative py-24 px-6 overflow-hidden"
         style={{ backgroundImage: `linear-gradient(180deg, hsla(22,35%,8%,0.55), hsla(22,35%,10%,0.7)), url(${wood})`, backgroundSize: "cover" }}
@@ -128,7 +128,7 @@ const Index = () => {
               KK was born in Sierra Leone with one belief: refreshment should taste like home. From sweet ripe mango to creamy pineapple yogurt, every bottle is filled in our Freetown facility with care.
             </p>
             <p className="text-white/80 leading-relaxed">
-              We work with local farmers, follow strict quality standards, and keep the price simple — Le 10 a bottle, no matter the flavour.
+              We work with local farmers, follow strict quality standards, and keep the price simple · Le 10 a bottle, no matter the flavour.
             </p>
             <Link to="/about" className="inline-flex items-center gap-2 mt-6 text-[hsl(var(--sun))] font-semibold hover:gap-3 transition-all">
               Read our story <ArrowRight className="h-4 w-4" />
@@ -138,7 +138,7 @@ const Index = () => {
         <div className="absolute bottom-0 left-0 right-0 h-12 paper-bg torn-top" aria-hidden />
       </section>
 
-      {/* DIE SORTEN — three featured spinning bottles */}
+      {/* DIE SORTEN · three featured spinning bottles */}
       <section className="paper-bg py-24 px-6">
         <div className="mx-auto max-w-[1200px] text-center">
           <p className="eyebrow text-[hsl(var(--sea))]">Die Sorten</p>
@@ -179,7 +179,7 @@ const Index = () => {
       {/* FINAL CTA */}
       <section className="paper-bg py-20 px-6 text-center">
         <h2 className="display text-4xl md:text-6xl">Until your next sip.</h2>
-        <p className="text-muted-foreground mt-4 max-w-xl mx-auto">Stock up on KK today. Pay on delivery anywhere in Sierra Leone — every bottle just Le 10.</p>
+        <p className="text-muted-foreground mt-4 max-w-xl mx-auto">Stock up on KK today. Pay on delivery anywhere in Sierra Leone · every bottle just Le 10.</p>
         <div className="mt-8">
           <OrderDialog trigger={<button className="btn-pill bg-[hsl(var(--wood))] text-white text-base px-8 py-3">Place an order →</button>} />
         </div>

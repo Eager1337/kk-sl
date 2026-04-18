@@ -61,19 +61,25 @@ export const OrderDialog = ({ initialDrink, trigger }: OrderDialogProps) => {
       const d = DRINKS.find((x) => x.slug === c.slug)!;
       return { slug: d.slug, name: d.name, qty: c.qty, price: d.price };
     });
-    const { error } = await supabase.from("orders").insert({
+    const orderBody = {
       customer_name: parsed.data.customer_name,
       phone: parsed.data.phone,
       address: parsed.data.address,
       notes: parsed.data.notes || null,
       items,
       total_leones: total,
-    });
-    setSubmitting(false);
+    };
+    const { error } = await supabase.from("orders").insert(orderBody);
     if (error) {
+      setSubmitting(false);
       toast.error("Could not place order. Please try again.");
       return;
     }
+    // Fire-and-forget owner notification (email + WhatsApp link)
+    supabase.functions
+      .invoke("notify-order", { body: orderBody })
+      .catch((e) => console.warn("notify-order failed", e));
+    setSubmitting(false);
     setSubmitted(true);
   };
 

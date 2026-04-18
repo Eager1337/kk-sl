@@ -125,6 +125,24 @@
   .pause-on-hover:hover .spin-bottle,
   .pause-on-hover:hover .spin-bottle-slow { animation-play-state: paused; }
   .marquee-track { animation: marquee 38s linear infinite; }
+  .price-pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold;
+    background: linear-gradient(135deg, hsl(var(--sun)), hsl(var(--mango)));
+    color: hsl(var(--wood));
+    box-shadow: 0 6px 18px -6px hsl(var(--sun) / 0.6);
+    animation: pulseGlow 2.4s ease-in-out infinite;
+  }
+  .trust-card {
+    @apply rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1;
+    background: linear-gradient(180deg, #fff, hsl(var(--paper)));
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+  }
+  .trust-card:hover { box-shadow: 0 18px 40px -16px hsl(var(--sea) / 0.35); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 6px 18px -6px hsl(var(--sun) / 0.5); }
+  50% { box-shadow: 0 10px 26px -6px hsl(var(--sun) / 0.85); }
 }
 
 @keyframes fadeUp {

@@ -6,7 +6,7 @@ const Water = () => (
     drink={getDrink("water")!}
     highlight={{
       title: "Pure. Clean. Trusted.",
-      body: "Filtered through a multi-stage purification process for the cleanest, crispest taste — the water you can trust every day.",
+      body: "Filtered through a multi-stage purification process for the cleanest, crispest taste · the water you can trust every day.",
     }}
     description="Sourced and bottled in Sierra Leone, KK Pure Drink Water is the everyday hydration choice for families and businesses."
     specs={[

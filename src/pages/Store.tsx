@@ -10,7 +10,7 @@ const Store = () => (
       <p className="eyebrow text-[hsl(var(--sea))]">All KK Drinks</p>
       <h1 className="display text-5xl md:text-6xl mt-3">Pick your favourite.</h1>
       <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
-        Seven distinct flavours. One simple price — <span className="font-semibold text-foreground">Le 10</span> per bottle.
+        Seven distinct flavours. One simple price · <span className="font-semibold text-foreground">Le 10</span> per bottle.
       </p>
     </section>
 

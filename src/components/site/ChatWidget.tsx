@@ -7,7 +7,7 @@ type Msg = { role: "user" | "assistant"; content: string };
 
 const SUGGESTIONS = [
   "What should I drink with jollof rice?",
-  "It's hot in Freetown — what do you recommend?",
+  "It's hot in Freetown · what do you recommend?",
   "Tell me about KK Mixed Fruit",
   "How can I order?",
 ];
@@ -57,7 +57,7 @@ export const ChatWidget = () => {
         },
         body: JSON.stringify({ messages: [...messages, userMsg].map(({ role, content }) => ({ role, content })) }),
       });
-      if (resp.status === 429) { toast.error("Slow down a bit — too many requests."); setBusy(false); return; }
+      if (resp.status === 429) { toast.error("Slow down a bit · too many requests."); setBusy(false); return; }
       if (resp.status === 402) { toast.error("AI credits exhausted. Add funds in Settings → Workspace → Usage."); setBusy(false); return; }
       if (!resp.ok || !resp.body) throw new Error("stream failed");
 
