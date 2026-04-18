@@ -35,14 +35,14 @@ const Index = () => {
               <Link to="/store" className="btn-pill bg-white/10 text-white border border-white/20 backdrop-blur">Explore drinks</Link>
             </div>
           </div>
-          <div className="order-1 md:order-2 relative h-[280px] sm:h-[340px] md:h-[440px] fade-up" style={{ animationDelay: "0.15s" }}>
-            <div className="absolute left-[6%] top-[20%] w-[26%] sm:w-[28%] z-10 opacity-90">
+          <div className="order-1 md:order-2 relative h-[360px] sm:h-[440px] md:h-[540px] fade-up" style={{ animationDelay: "0.15s" }}>
+            <div className="absolute left-[6%] top-[20%] w-[34%] sm:w-[36%] z-10 opacity-90">
               <SpinBottle src={heroDrinks[0]!.image} alt={heroDrinks[0]!.name} speed="slow" glow="hsl(var(--mango))" priority />
             </div>
-            <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[32%] sm:w-[34%] z-20">
+            <div className="absolute left-1/2 -translate-x-1/2 top-0 w-[40%] sm:w-[42%] z-20">
               <SpinBottle src={heroDrinks[1]!.image} alt={heroDrinks[1]!.name} glow="hsl(var(--sun))" priority />
             </div>
-            <div className="absolute right-[6%] top-[24%] w-[24%] sm:w-[26%] z-10 opacity-90">
+            <div className="absolute right-[6%] top-[24%] w-[32%] sm:w-[34%] z-10 opacity-90">
               <SpinBottle src={heroDrinks[2]!.image} alt={heroDrinks[2]!.name} speed="slow" glow="hsl(var(--sun))" priority />
             </div>
           </div>
@@ -145,7 +145,7 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {sorten.map((d, i) => (
               <div key={d.slug} className="flex flex-col items-center fade-up" style={{ animationDelay: `${i * 0.1}s` }}>
-                <div className="w-full max-w-[170px] sm:max-w-[190px] h-[240px] sm:h-[280px] flex items-end">
+                <div className="w-full max-w-[220px] sm:max-w-[240px] h-[320px] sm:h-[360px] flex items-end">
                   <SpinBottle src={d.image} alt={d.name} glow={`hsl(${d.accent})`} speed={i % 2 === 0 ? "normal" : "slow"} />
                 </div>
                 <h3 className="display text-2xl mt-6">{d.short}</h3>
