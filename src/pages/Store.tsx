@@ -14,25 +14,28 @@ const Store = () => (
       </p>
     </section>
 
-    <section className="paper-bg pb-24 px-6">
-      <div className="mx-auto max-w-[1200px] grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <section className="paper-bg pb-20 px-4 sm:px-6">
+      <div className="mx-auto max-w-[1200px] grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {DRINKS.map((d, i) => (
-          <article key={d.slug} className="bg-white rounded-2xl p-6 pt-10 shadow-md hover:shadow-2xl transition-shadow">
-            <div className="h-72 flex items-end">
+          <article
+            key={d.slug}
+            className="bg-white rounded-2xl p-4 sm:p-5 pt-6 shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 fade-up"
+            style={{ animationDelay: `${i * 0.05}s` }}
+          >
+            <div className="h-40 sm:h-48 flex items-end">
               <SpinBottle src={d.image} alt={d.name} glow={`hsl(${d.accent})`} speed={i % 2 === 0 ? "normal" : "slow"} />
             </div>
-            <div className="text-center mt-6 space-y-1">
-              <p className="eyebrow text-[hsl(var(--sea))]">{d.category}</p>
-              <h3 className="display text-2xl">{d.short}</h3>
-              <p className="text-sm text-muted-foreground">{d.tagline}</p>
-              <p className="text-xs text-muted-foreground/80">{d.volume}</p>
+            <div className="text-center mt-4 space-y-0.5">
+              <p className="eyebrow text-[10px] text-[hsl(var(--sea))]">{d.category}</p>
+              <h3 className="display text-lg sm:text-xl">{d.short}</h3>
+              <p className="text-xs text-muted-foreground line-clamp-1">{d.tagline}</p>
             </div>
-            <div className="flex items-center justify-between gap-3 mt-5">
-              <span className="display text-2xl">Le {d.price}</span>
-              <OrderDialog initialDrink={d} trigger={<button className="btn-brush text-[10px]">Order</button>} />
+            <div className="flex items-center justify-between gap-2 mt-4">
+              <span className="display text-lg">Le {d.price}</span>
+              <OrderDialog initialDrink={d} trigger={<button className="btn-brush text-[9px] px-4 py-2">Order</button>} />
             </div>
             {d.href && (
-              <Link to={d.href} className="block text-center text-xs text-[hsl(var(--sea))] mt-3 hover:underline">
+              <Link to={d.href} className="block text-center text-[11px] text-[hsl(var(--sea))] mt-2 hover:underline">
                 Learn more →
               </Link>
             )}

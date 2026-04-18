@@ -29,8 +29,8 @@ export const DrinkPage = ({ drink, description, highlight, specs }: DrinkPagePro
             <Link to="/store" className="btn-pill bg-white/10 text-white border border-white/20 backdrop-blur">All drinks</Link>
           </div>
         </div>
-        <div className="h-[520px] flex items-center justify-center fade-up" style={{ animationDelay: "0.15s" }}>
-          <div className="w-[70%] max-w-[340px]">
+        <div className="h-[300px] sm:h-[380px] md:h-[440px] flex items-center justify-center fade-up" style={{ animationDelay: "0.15s" }}>
+          <div className="w-[55%] sm:w-[50%] max-w-[240px]">
             <SpinBottle src={drink.image} alt={drink.name} glow={`hsl(${drink.accent})`} priority />
           </div>
         </div>
