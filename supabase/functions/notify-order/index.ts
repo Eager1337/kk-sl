@@ -1,6 +1,9 @@
 // Sends an email notification to the KK owner whenever a new order is placed.
 // Includes a one-click "Open in WhatsApp" link with the order pre-filled.
-import { corsHeaders } from "@supabase/supabase-js/cors";
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+};
 
 const OWNER_EMAIL = "ebeaver091@gmail.com";
 const OWNER_PHONE_INTL = "23273095177"; // Sierra Leone +232, drop leading 0
