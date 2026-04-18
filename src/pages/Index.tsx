@@ -60,7 +60,7 @@ const Index = () => {
             { Icon: Truck, t: "Delivery available", s: "Order & pay on delivery" },
             { Icon: Sparkles, t: "Always Le 10", s: "One price. Every drink." },
           ].map(({ Icon, t, s }) => (
-            <div key={t} className="flex items-start gap-3">
+            <div key={t} className="trust-card flex items-start gap-3">
               <Icon className="h-6 w-6 text-[hsl(var(--sea))] shrink-0 mt-0.5" />
               <div>
                 <div className="font-semibold text-sm">{t}</div>
