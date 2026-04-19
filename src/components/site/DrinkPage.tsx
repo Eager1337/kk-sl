@@ -2,6 +2,7 @@ import { Layout } from "@/components/site/Layout";
 import { SpinBottle } from "@/components/site/SpinBottle";
 import { OrderDialog } from "@/components/site/OrderDialog";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import wood from "@/assets/wood-bg.jpg";
 import type { Drink } from "@/data/drinks";
 
@@ -14,6 +15,35 @@ interface DrinkPageProps {
 
 export const DrinkPage = ({ drink, description, highlight, specs }: DrinkPageProps) => (
   <Layout>
+    <Helmet>
+      <title>{`${drink.name} · ${drink.tagline} | KK Drinks Sierra Leone`}</title>
+      <meta name="description" content={`${drink.name} — ${description} ${drink.volume}, Le ${drink.price}. Order online today.`} />
+      <link rel="canonical" href={drink.href || `/${drink.slug}`} />
+      <meta property="og:type" content="product" />
+      <meta property="og:title" content={`${drink.name} · KK Drinks Sierra Leone`} />
+      <meta property="og:description" content={`${drink.tagline} ${drink.volume} · Le ${drink.price}. Bottled fresh in Sierra Leone.`} />
+      <meta property="og:image" content={drink.image} />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={`${drink.name} · KK Drinks`} />
+      <meta name="twitter:description" content={drink.tagline} />
+      <meta name="twitter:image" content={drink.image} />
+      <script type="application/ld+json">{JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: drink.name,
+        description: description,
+        category: drink.category,
+        image: drink.image,
+        brand: { "@type": "Brand", name: "KK Drinks" },
+        offers: {
+          "@type": "Offer",
+          price: drink.price,
+          priceCurrency: "SLL",
+          availability: "https://schema.org/InStock",
+          url: drink.href || `/${drink.slug}`,
+        },
+      })}</script>
+    </Helmet>
     {/* Hero */}
     <section
       className="relative -mt-16 pt-32 pb-20 px-6 overflow-hidden"

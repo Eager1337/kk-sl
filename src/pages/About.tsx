@@ -1,9 +1,15 @@
 import { Layout } from "@/components/site/Layout";
+import { Helmet } from "react-helmet-async";
 import lineup from "@/assets/kk-lineup-tall.jpeg";
 import fruity from "@/assets/kk-fruity-four.jpeg";
 
 const About = () => (
   <Layout>
+    <Helmet>
+      <title>Our Story · KK Drinks Sierra Leone</title>
+      <meta name="description" content="KK Drinks is a Sierra Leonean beverage company crafting fruity sodas, pineapple yogurt and pure water in Kwama Village, Koya Rural District." />
+      <link rel="canonical" href="/about" />
+    </Helmet>
     <section className="bg-subtle py-20 text-center px-6">
       <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-3">About KK Drinks</p>
       <h1 className="display text-5xl md:text-7xl">Made in Sierra Leone.<br />Loved everywhere.</h1>
