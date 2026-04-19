@@ -37,9 +37,15 @@ const About = () => (
     </section>
 
     <section className="py-20 px-6 max-w-[1024px] mx-auto text-center">
-      <h2 className="display text-3xl md:text-4xl mb-3">Online ordering · coming soon.</h2>
-      <p className="text-muted-foreground text-lg">
-        We're working on bringing KK Drinks straight to your door. For now, find us at shops and stockists across Sierra Leone.
+      <h2 className="display text-3xl md:text-4xl mb-3">Visit us · get in touch.</h2>
+      <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+        KK Company Limited<br />
+        Waterloo–Masiaka Highway, Kwama Village<br />
+        Koya Rural District, Sierra Leone
+      </p>
+      <p className="mt-4 text-muted-foreground text-lg">
+        <a href="tel:+232033666888" className="hover:text-foreground">(+232) 033 666 888</a> · <a href="tel:+232090555999" className="hover:text-foreground">090 555 999</a><br />
+        <a href="mailto:kkfood866@gmail.com" className="hover:text-foreground">kkfood866@gmail.com</a>
       </p>
     </section>
   </Layout>
