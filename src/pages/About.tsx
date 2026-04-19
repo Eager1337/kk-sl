@@ -1,9 +1,15 @@
 import { Layout } from "@/components/site/Layout";
+import { Helmet } from "react-helmet-async";
 import lineup from "@/assets/kk-lineup-tall.jpeg";
 import fruity from "@/assets/kk-fruity-four.jpeg";
 
 const About = () => (
   <Layout>
+    <Helmet>
+      <title>Our Story · KK Drinks Sierra Leone</title>
+      <meta name="description" content="KK Drinks is a Sierra Leonean beverage company crafting fruity sodas, pineapple yogurt and pure water in Kwama Village, Koya Rural District." />
+      <link rel="canonical" href="/about" />
+    </Helmet>
     <section className="bg-subtle py-20 text-center px-6">
       <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-3">About KK Drinks</p>
       <h1 className="display text-5xl md:text-7xl">Made in Sierra Leone.<br />Loved everywhere.</h1>
@@ -47,6 +53,22 @@ const About = () => (
         <a href="tel:+232033666888" className="hover:text-foreground">(+232) 033 666 888</a> · <a href="tel:+232090555999" className="hover:text-foreground">090 555 999</a><br />
         <a href="mailto:kkfood866@gmail.com" className="hover:text-foreground">kkfood866@gmail.com</a>
       </p>
+    </section>
+
+    <section className="px-6 pb-20 bg-subtle pt-12">
+      <div className="max-w-[1100px] mx-auto">
+        <h3 className="display text-2xl md:text-3xl text-center mb-6">Find us on the map</h3>
+        <div className="rounded-2xl overflow-hidden shadow-lg border border-border/40 aspect-[16/9]">
+          <iframe
+            title="KK Company Limited — Kwama Village, Koya Rural District"
+            src="https://www.google.com/maps?q=Kwama+Village+Waterloo+Masiaka+Highway+Koya+Rural+District+Sierra+Leone&output=embed"
+            className="w-full h-full border-0"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+        </div>
+      </div>
     </section>
   </Layout>
 );

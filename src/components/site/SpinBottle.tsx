@@ -14,7 +14,7 @@ interface SpinBottleProps {
  * Compact, always-spinning bottle with 3D Y-rotation, interactive tilt,
  * soft floor shadow and brand glow. Pauses on hover for readability.
  */
-export const SpinBottle = ({ src, alt, className, speed = "normal", glow, priority }: SpinBottleProps) => {
+export const SpinBottle = ({ src, alt, className, speed = "normal", glow, priority = true }: SpinBottleProps) => {
   const [loaded, setLoaded] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
 
@@ -53,8 +53,9 @@ export const SpinBottle = ({ src, alt, className, speed = "normal", glow, priori
         <img
           src={src}
           alt={alt}
-          loading={priority ? "eager" : "lazy"}
-          decoding="async"
+          loading="eager"
+          decoding="sync"
+          fetchPriority="high"
           onLoad={() => setLoaded(true)}
           style={{ mixBlendMode: "multiply", background: "transparent" }}
           className={cn(

@@ -58,14 +58,14 @@ const Store = () => (
               className="absolute inset-x-0 top-0 h-40 opacity-40 pointer-events-none"
               style={{ background: `radial-gradient(ellipse at top, hsl(${d.accent} / 0.45), transparent 70%)` }}
             />
-            {/* image area — fully contained, no overflow onto text below */}
-            <div className="relative h-44 sm:h-48 flex items-end justify-center px-6 pt-6 overflow-hidden">
+            {/* image area — full bottle visible */}
+            <div className="relative h-64 sm:h-72 flex items-end justify-center px-6 pt-6">
               <SpinBottle
                 src={d.image}
                 alt={`${d.name} — ${d.tagline}`}
                 glow={`hsl(${d.accent})`}
                 speed={i % 2 === 0 ? "normal" : "slow"}
-                className="max-h-[170px] sm:max-h-[180px] w-auto"
+                className="max-h-[260px] sm:max-h-[280px] w-auto"
               />
             </div>
 
