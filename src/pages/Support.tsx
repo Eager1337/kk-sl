@@ -32,6 +32,28 @@ const Support = () => (
         </article>
       ))}
     </section>
+
+    <section className="bg-subtle py-16 px-6">
+      <div className="max-w-[1024px] mx-auto grid md:grid-cols-3 gap-8 text-center md:text-left">
+        <div>
+          <p className="eyebrow text-muted-foreground mb-2">Visit</p>
+          <p className="text-base leading-relaxed">KK Company Limited<br />Waterloo–Masiaka Highway<br />Kwama Village, Koya Rural District<br />Sierra Leone</p>
+        </div>
+        <div>
+          <p className="eyebrow text-muted-foreground mb-2">Call</p>
+          <p className="text-base leading-relaxed">
+            <a href="tel:+232033666888" className="hover:underline">(+232) 033 666 888</a><br />
+            <a href="tel:+232090555999" className="hover:underline">090 555 999</a>
+          </p>
+        </div>
+        <div>
+          <p className="eyebrow text-muted-foreground mb-2">Email</p>
+          <p className="text-base leading-relaxed">
+            <a href="mailto:kkfood866@gmail.com" className="hover:underline">kkfood866@gmail.com</a>
+          </p>
+        </div>
+      </div>
+    </section>
   </Layout>
 );
 

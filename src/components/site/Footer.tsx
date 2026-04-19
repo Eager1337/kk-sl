@@ -30,9 +30,9 @@ export const Footer = () => (
       <div>
         <h4 className="eyebrow text-[hsl(var(--sun))] mb-4">Contact</h4>
         <ul className="space-y-2 text-white/70">
-          <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 shrink-0" /> Freetown, Sierra Leone</li>
-          <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5 shrink-0" /> +232 00 000 000</li>
-          <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 shrink-0" /> hello@kkdrinks.sl</li>
+          <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 shrink-0" /> KK Company Limited, Waterloo–Masiaka Highway, Kwama Village, Koya Rural District, Sierra Leone</li>
+          <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5 shrink-0" /> <a href="tel:+232033666888" className="hover:text-white">(+232) 033 666 888</a> · <a href="tel:+232090555999" className="hover:text-white">090 555 999</a></li>
+          <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 shrink-0" /> <a href="mailto:kkfood866@gmail.com" className="hover:text-white">kkfood866@gmail.com</a></li>
         </ul>
       </div>
     </div>
