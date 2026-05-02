@@ -43,8 +43,19 @@ export const Footer = () => (
         <div className="flex gap-5">
           <Link to="#" className="hover:text-white">Privacy</Link>
           <Link to="#" className="hover:text-white">Terms</Link>
-          <Link to="#" className="hover:text-white">Stockists</Link>
+          <Link to="/wholesale" className="hover:text-white">Stockists</Link>
         </div>
+      </div>
+      <div className="mx-auto max-w-[1200px] px-6 pb-5 -mt-2 text-xs text-white/50 text-center md:text-right">
+        Crafted &amp; developed by{" "}
+        <a
+          href="https://github.com/Eager1337?tab=repositories"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[hsl(var(--sun))] hover:text-white font-semibold tracking-wide"
+        >
+          Eager Beaver
+        </a>
       </div>
     </div>
   </footer>

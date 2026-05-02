@@ -6,6 +6,7 @@ import { OrderDialog } from "./OrderDialog";
 const links = [
   { to: "/", label: "Home" },
   { to: "/store", label: "Our Drinks" },
+  { to: "/wholesale", label: "Wholesale" },
   { to: "/about", label: "Our Story" },
   { to: "/support", label: "Contact" },
 ];
