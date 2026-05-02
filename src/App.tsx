@@ -15,6 +15,7 @@ import Tamarind from "./pages/Tamarind.tsx";
 import Store from "./pages/Store.tsx";
 import Support from "./pages/Support.tsx";
 import About from "./pages/About.tsx";
+import Wholesale from "./pages/Wholesale.tsx";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/tamarind" element={<Tamarind />} />
           <Route path="/water" element={<Water />} />
           <Route path="/store" element={<Store />} />
+          <Route path="/wholesale" element={<Wholesale />} />
           <Route path="/about" element={<About />} />
           <Route path="/support" element={<Support />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
