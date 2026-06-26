@@ -2,3 +2,15 @@ project_id = "lctsqgmxumvpvzrenozl"
 
 [functions.kk-chat]
 verify_jwt = false
+
+[functions.notify-order]
+verify_jwt = false
+
+[functions.notify-lead]
+verify_jwt = false
+
+[functions.create-checkout]
+verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false
