@@ -57,10 +57,10 @@ export const SpinBottle = ({ src, alt, className, speed = "normal", glow, priori
           decoding="sync"
           fetchPriority="high"
           onLoad={() => setLoaded(true)}
-          style={{ mixBlendMode: "multiply", background: "transparent" }}
+          style={{ background: "transparent", boxShadow: "none", border: "none" }}
           className={cn(
             speed === "slow" ? "spin-bottle-slow" : "spin-bottle",
-            "drop-shadow-[0_22px_22px_rgba(0,0,0,0.32)] mx-auto h-auto w-full select-none bg-transparent",
+            "drop-shadow-[0_26px_20px_rgba(0,0,0,0.45)] mx-auto h-auto w-full select-none bg-transparent",
             !loaded && "opacity-0",
           )}
           draggable={false}
