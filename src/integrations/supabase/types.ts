@@ -19,34 +19,127 @@ export type Database = {
           address: string
           created_at: string
           customer_name: string
+          email: string | null
           id: string
           items: Json
           notes: string | null
+          payment_method: string | null
+          payment_status: string
           phone: string
           status: string
+          stripe_session_id: string | null
           total_leones: number
         }
         Insert: {
           address: string
           created_at?: string
           customer_name: string
+          email?: string | null
           id?: string
           items: Json
           notes?: string | null
+          payment_method?: string | null
+          payment_status?: string
           phone: string
           status?: string
+          stripe_session_id?: string | null
           total_leones: number
         }
         Update: {
           address?: string
           created_at?: string
           customer_name?: string
+          email?: string | null
           id?: string
           items?: Json
           notes?: string | null
+          payment_method?: string | null
+          payment_status?: string
           phone?: string
           status?: string
+          stripe_session_id?: string | null
           total_leones?: number
+        }
+        Relationships: []
+      }
+      analytics_events: {
+        Row: {
+          created_at: string
+          id: string
+          label: string | null
+          meta: Json | null
+          path: string
+          referrer: string | null
+          session_id: string | null
+          type: string
+          value: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          label?: string | null
+          meta?: Json | null
+          path?: string
+          referrer?: string | null
+          session_id?: string | null
+          type: string
+          value?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          label?: string | null
+          meta?: Json | null
+          path?: string
+          referrer?: string | null
+          session_id?: string | null
+          type?: string
+          value?: number | null
+        }
+        Relationships: []
+      }
+      leads: {
+        Row: {
+          business: string
+          cases: number | null
+          city: string
+          created_at: string
+          drink: string | null
+          email: string | null
+          estimate_leones: number | null
+          id: string
+          name: string
+          notes: string | null
+          phone: string
+          status: string
+        }
+        Insert: {
+          business: string
+          cases?: number | null
+          city: string
+          created_at?: string
+          drink?: string | null
+          email?: string | null
+          estimate_leones?: number | null
+          id?: string
+          name: string
+          notes?: string | null
+          phone: string
+          status?: string
+        }
+        Update: {
+          business?: string
+          cases?: number | null
+          city?: string
+          created_at?: string
+          drink?: string | null
+          email?: string | null
+          estimate_leones?: number | null
+          id?: string
+          name?: string
+          notes?: string | null
+          phone?: string
+          status?: string
         }
         Relationships: []
       }

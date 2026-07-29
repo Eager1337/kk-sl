@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { MessageCircle, X, Send, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { track } from "@/lib/analytics";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -95,7 +96,12 @@ export const ChatWidget = () => {
   return (
     <>
       <button
-        onClick={() => setOpen((o) => !o)}
+        onClick={() =>
+          setOpen((o) => {
+            if (!o) void track("chat_open");
+            return !o;
+          })
+        }
         aria-label="Open KK helper chat"
         className="fixed bottom-5 right-5 z-50 h-14 w-14 rounded-full bg-[hsl(var(--sea))] text-white shadow-2xl flex items-center justify-center hover:scale-110 transition-transform"
       >

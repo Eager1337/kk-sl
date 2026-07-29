@@ -2,6 +2,7 @@ import { Layout } from "@/components/site/Layout";
 import { Helmet } from "react-helmet-async";
 import lineup from "@/assets/kk-lineup-tall.jpeg";
 import fruity from "@/assets/kk-fruity-four.jpeg";
+import ambassador from "@/assets/ambassador.png";
 
 const About = () => (
   <Layout>
@@ -10,12 +11,24 @@ const About = () => (
       <meta name="description" content="KK Drinks is a Sierra Leonean beverage company crafting fruity sodas, pineapple yogurt and pure water in Kwama Village, Koya Rural District." />
       <link rel="canonical" href="/about" />
     </Helmet>
-    <section className="bg-subtle py-20 text-center px-6">
-      <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-3">About KK Drinks</p>
-      <h1 className="display text-5xl md:text-7xl">Made in Sierra Leone.<br />Loved everywhere.</h1>
-      <p className="mt-6 max-w-2xl mx-auto text-xl text-muted-foreground">
-        KK is a Sierra Leonean drinks company crafting refreshing soft drinks, yogurt beverages and pure drinking water · at a price everyone can enjoy.
-      </p>
+    <section className="bg-subtle px-6 py-16 md:py-20">
+      <div className="mx-auto grid max-w-[1100px] items-center gap-10 md:grid-cols-[1.1fr_0.9fr]">
+        <div className="text-center md:text-left">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">About KK Drinks</p>
+          <h1 className="display text-4xl sm:text-5xl md:text-6xl text-balance">Made in Sierra Leone.<br />Loved everywhere.</h1>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground md:mx-0 md:text-xl">
+            KK is a Sierra Leonean drinks company crafting refreshing soft drinks, yogurt beverages and pure drinking water · at a price everyone can enjoy.
+          </p>
+        </div>
+        {/* Brand ambassador cutout welcomes visitors — transparent, blends with the cream section */}
+        <img
+          src={ambassador}
+          alt="A young Sierra Leonean man enjoying a KK Orange Fruity Soft Drink"
+          className="mx-auto max-h-[450px] w-auto object-contain"
+          fetchPriority="high"
+          decoding="async"
+        />
+      </div>
     </section>
 
     <section className="py-20 px-6 max-w-[1024px] mx-auto grid md:grid-cols-2 gap-10 items-center">

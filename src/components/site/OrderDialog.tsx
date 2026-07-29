@@ -5,10 +5,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Minus, Plus, Trash2, ShoppingBag, CheckCircle2 } from "lucide-react";
+import { Minus, Plus, Trash2, ShoppingBag, CheckCircle2, Truck, CreditCard } from "lucide-react";
 import { DRINKS, type Drink } from "@/data/drinks";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { track } from "@/lib/analytics";
+
+type PaymentMethod = "delivery" | "stripe";
 
 type CartItem = { slug: string; qty: number };
 
@@ -16,6 +19,7 @@ const orderSchema = z.object({
   customer_name: z.string().trim().min(2, "Name is too short").max(100),
   phone: z.string().trim().min(6, "Phone looks too short").max(30),
   address: z.string().trim().min(4, "Add a delivery address").max(300),
+  email: z.string().trim().email("Enter a valid email").max(255).optional().or(z.literal("")),
   notes: z.string().trim().max(500).optional(),
 });
 
@@ -31,7 +35,8 @@ export const OrderDialog = ({ initialDrink, trigger }: OrderDialogProps) => {
   const [cart, setCart] = useState<CartItem[]>(
     initialDrink ? [{ slug: initialDrink.slug, qty: 1 }] : [],
   );
-  const [form, setForm] = useState({ customer_name: "", phone: "", address: "", notes: "" });
+  const [form, setForm] = useState({ customer_name: "", phone: "", address: "", email: "", notes: "" });
+  const [payment, setPayment] = useState<PaymentMethod>("delivery");
 
   const setQty = (slug: string, qty: number) => {
     setCart((prev) => {
@@ -56,6 +61,10 @@ export const OrderDialog = ({ initialDrink, trigger }: OrderDialogProps) => {
       toast.error("Add at least one drink");
       return;
     }
+    if (payment === "stripe" && !parsed.data.email) {
+      toast.error("Add your email so we can send your payment receipt");
+      return;
+    }
     setSubmitting(true);
     const items = cart.map((c) => {
       const d = DRINKS.find((x) => x.slug === c.slug)!;
@@ -65,28 +74,71 @@ export const OrderDialog = ({ initialDrink, trigger }: OrderDialogProps) => {
       customer_name: parsed.data.customer_name,
       phone: parsed.data.phone,
       address: parsed.data.address,
+      email: parsed.data.email || null,
       notes: parsed.data.notes || null,
       items,
       total_leones: total,
+      payment_method: payment,
+      payment_status: payment === "stripe" ? "pending" : "unpaid",
     };
-    const { error } = await supabase.from("orders").insert(orderBody);
-    if (error) {
+
+    // Persist the order and get its id back (needed to reconcile Stripe payment).
+    const { data: inserted, error } = await supabase
+      .from("orders")
+      .insert(orderBody)
+      .select("id")
+      .single();
+    if (error || !inserted) {
       setSubmitting(false);
       toast.error("Could not place order. Please try again.");
       return;
     }
+
     // Fire-and-forget owner notification (email + WhatsApp link)
     supabase.functions
-      .invoke("notify-order", { body: orderBody })
-      .catch((e) => console.warn("notify-order failed", e));
+      .invoke("notify-order", { body: { ...orderBody, id: inserted.id } })
+      .catch((e) => console.log("[v0] notify-order failed", e));
+
+    void track("order_submit", { label: payment, value: total, meta: { items: items.length, order_id: inserted.id } });
+
+    if (payment === "stripe") {
+      // Create a Stripe Checkout session and redirect the customer to pay.
+      try {
+        void track("checkout_start", { value: total, meta: { order_id: inserted.id } });
+        const { data, error: fnError } = await supabase.functions.invoke("create-checkout", {
+          body: {
+            order_id: inserted.id,
+            customer_name: parsed.data.customer_name,
+            phone: parsed.data.phone,
+            address: parsed.data.address,
+            notes: parsed.data.notes || null,
+            items,
+            total_leones: total,
+            origin: window.location.origin,
+          },
+        });
+        if (fnError || !data?.url) throw fnError ?? new Error("No checkout URL returned");
+        window.location.href = data.url as string;
+        return; // browser navigates away to Stripe
+      } catch (e) {
+        console.log("[v0] create-checkout failed", e);
+        setSubmitting(false);
+        toast.error("Online payment is unavailable right now. Your order was saved — we'll call to arrange payment on delivery.");
+        setSubmitted(true);
+        return;
+      }
+    }
+
     setSubmitting(false);
     setSubmitted(true);
   };
 
   const reset = () => {
     setSubmitted(false);
+    setSubmitting(false);
+    setPayment("delivery");
     setCart(initialDrink ? [{ slug: initialDrink.slug, qty: 1 }] : []);
-    setForm({ customer_name: "", phone: "", address: "", notes: "" });
+    setForm({ customer_name: "", phone: "", address: "", email: "", notes: "" });
   };
 
   return (
@@ -110,7 +162,7 @@ export const OrderDialog = ({ initialDrink, trigger }: OrderDialogProps) => {
               <DialogTitle className="display text-2xl flex items-center gap-2">
                 <ShoppingBag className="h-5 w-5" /> Place an order
               </DialogTitle>
-              <DialogDescription>Pay on delivery in Sierra Leonean Leones (Le). We'll call to confirm.</DialogDescription>
+              <DialogDescription>Pay on delivery or securely online by card. We&apos;ll call to confirm delivery.</DialogDescription>
             </DialogHeader>
 
             <div className="space-y-3">
@@ -162,13 +214,46 @@ export const OrderDialog = ({ initialDrink, trigger }: OrderDialogProps) => {
                 </div>
               </div>
               <div>
+                <Label htmlFor="email">
+                  Email {payment === "stripe" ? "(for your receipt)" : "(optional)"}
+                </Label>
+                <Input id="email" type="email" maxLength={255} placeholder="you@example.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+              </div>
+              <div>
                 <Label htmlFor="notes">Notes (optional)</Label>
                 <Textarea id="notes" maxLength={500} rows={2} value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} />
               </div>
             </div>
 
+            {/* Payment method */}
+            <div className="space-y-2 pt-1">
+              <p className="eyebrow text-muted-foreground">Payment</p>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setPayment("delivery")}
+                  aria-pressed={payment === "delivery"}
+                  className={`flex items-center gap-2 rounded-lg border p-3 text-left text-sm transition ${payment === "delivery" ? "border-[hsl(var(--sea))] bg-[hsl(var(--sea))/0.08] ring-1 ring-[hsl(var(--sea))]" : "border-border hover:bg-muted"}`}
+                >
+                  <Truck className="h-4 w-4 shrink-0" />
+                  <span>Pay on delivery</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPayment("stripe")}
+                  aria-pressed={payment === "stripe"}
+                  className={`flex items-center gap-2 rounded-lg border p-3 text-left text-sm transition ${payment === "stripe" ? "border-[hsl(var(--sea))] bg-[hsl(var(--sea))/0.08] ring-1 ring-[hsl(var(--sea))]" : "border-border hover:bg-muted"}`}
+                >
+                  <CreditCard className="h-4 w-4 shrink-0" />
+                  <span>Pay online (card)</span>
+                </button>
+              </div>
+            </div>
+
             <Button onClick={submit} disabled={submitting || cart.length === 0} size="lg" className="w-full">
-              {submitting ? "Placing order…" : `Place order · Le ${total}`}
+              {submitting
+                ? payment === "stripe" ? "Redirecting to payment…" : "Placing order…"
+                : payment === "stripe" ? `Pay online · Le ${total}` : `Place order · Le ${total}`}
             </Button>
           </>
         )}

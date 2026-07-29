@@ -9,6 +9,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { z } from "zod";
+import { supabase } from "@/integrations/supabase/client";
+import { track } from "@/lib/analytics";
+import ambassador from "@/assets/ambassador.png";
 import {
   Truck,
   Factory,
@@ -119,7 +122,8 @@ const Wholesale = () => {
 
   /* Lead form */
   const [lead, setLead] = useState({ name: "", business: "", city: "", phone: "", email: "", notes: "" });
-  const submitLead = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+  const submitLead = async (e: React.FormEvent) => {
     e.preventDefault();
     const parsed = stockistSchema.safeParse(lead);
     if (!parsed.success) {
@@ -127,12 +131,40 @@ const Wholesale = () => {
       toast.error(first ?? "Please check the form");
       return;
     }
-    const subject = encodeURIComponent(`Stockist enquiry — ${parsed.data.business}`);
-    const body = encodeURIComponent(
-      `Name: ${parsed.data.name}\nBusiness: ${parsed.data.business}\nCity: ${parsed.data.city}\nPhone: ${parsed.data.phone}\nEmail: ${parsed.data.email ?? "-"}\n\nNotes:\n${parsed.data.notes ?? "-"}\n\n— Sent from kk-sl.lovable.app/wholesale`,
-    );
-    window.location.href = `mailto:kkfood866@gmail.com?subject=${subject}&body=${body}`;
-    toast.success("Opening your email — we'll be in touch within 24h.");
+    setSubmitting(true);
+    // Snapshot the current bulk-calculator interest so the owner gets context.
+    const payload = {
+      name: parsed.data.name,
+      business: parsed.data.business,
+      city: parsed.data.city,
+      phone: parsed.data.phone,
+      email: parsed.data.email || null,
+      notes: parsed.data.notes || null,
+      cases,
+      drink: drink.name,
+      estimate_leones: totals.net,
+    };
+    try {
+      // 1) Persist the lead
+      const { error: insertError } = await supabase.from("leads").insert(payload);
+      if (insertError) throw insertError;
+
+      // 2) Email the owner (best-effort — never block the success state)
+      supabase.functions.invoke("notify-lead", { body: payload }).catch((err) => {
+        console.log("[v0] notify-lead invoke failed", err);
+      });
+
+      // 3) Analytics
+      void track("wholesale_submit", { label: parsed.data.business, value: totals.net, meta: { city: parsed.data.city, cases } });
+
+      toast.success("Request received — we'll be in touch within 24 hours.");
+      setLead({ name: "", business: "", city: "", phone: "", email: "", notes: "" });
+    } catch (err) {
+      console.log("[v0] lead submit failed", err);
+      toast.error("Something went wrong. Please call us or try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   /* Loyalty */
@@ -320,6 +352,35 @@ const Wholesale = () => {
         </div>
       </section>
 
+      {/* WHOLESALE INVITATION · brand ambassador editorial band */}
+      <section className="bg-[hsl(var(--paper))] px-6 pt-16">
+        <div className="mx-auto grid max-w-[1100px] items-end gap-8 md:grid-cols-[0.8fr_1.2fr]">
+          <img
+            src={ambassador}
+            alt="A young Sierra Leonean man enjoying a KK Orange Fruity Soft Drink"
+            className="mx-auto max-h-[450px] w-auto self-end object-contain md:mx-0"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="pb-6 text-center md:pb-16 md:text-left">
+            <p className="eyebrow text-[hsl(var(--sea))]">Order in bulk</p>
+            <h2 className="display mt-2 text-4xl md:text-5xl text-balance">Bring KK to your customers.</h2>
+            <p className="mt-4 max-w-xl text-muted-foreground leading-relaxed md:mx-0 mx-auto">
+              Every bottle is Le 10 retail — and the more cases you order, the deeper your wholesale
+              discount. Use the calculator below to size up your order, then send us a partnership request.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3 md:justify-start">
+              <a href="#calculator" className="btn-brush rounded-full bg-[hsl(var(--sun))] px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] text-[hsl(var(--wood))]">
+                Calculate my order
+              </a>
+              <a href="#stockist" className="rounded-full border border-[hsl(var(--wood))/0.2] px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] transition hover:bg-black/5">
+                Become a stockist
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* BULK CALCULATOR */}
       <section id="calculator" className="py-20 px-6">
         <div className="max-w-[1100px] mx-auto">
@@ -476,8 +537,8 @@ const Wholesale = () => {
                   placeholder="e.g. 30 cases of Mango, 20 of Pure Water, monthly..."
                 />
               </div>
-              <Button type="submit" className="sm:col-span-2 bg-[hsl(var(--mango))] hover:bg-[hsl(var(--sun))] text-[hsl(var(--wood))] font-bold uppercase tracking-[0.2em] text-xs py-6">
-                <CheckCircle2 className="mr-2 h-4 w-4" /> Send partnership request
+              <Button type="submit" disabled={submitting} className="sm:col-span-2 bg-[hsl(var(--mango))] hover:bg-[hsl(var(--sun))] text-[hsl(var(--wood))] font-bold uppercase tracking-[0.2em] text-xs py-6 disabled:opacity-70">
+                <CheckCircle2 className="mr-2 h-4 w-4" /> {submitting ? "Sending…" : "Send partnership request"}
               </Button>
             </form>
           </div>

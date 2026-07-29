@@ -3,6 +3,9 @@ import { ProductCard } from "@/components/site/ProductCard";
 import { DRINKS } from "@/data/drinks";
 import { Helmet } from "react-helmet-async";
 import { Star } from "lucide-react";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
 
 const TESTIMONIALS = [
   { name: "Aminata K.", role: "Freetown", text: "KK Mango is my daughter's favourite. Always fresh, always cold from our local shop." },
@@ -10,7 +13,26 @@ const TESTIMONIALS = [
   { name: "Fatmata B.", role: "Makeni", text: "The Pineapple Yogurt is unlike anything else on the market. A real Sierra Leonean signature." },
 ];
 
-const Store = () => (
+const Store = () => {
+  const [params, setParams] = useSearchParams();
+
+  useEffect(() => {
+    if (params.get("paid") === "1") {
+      toast.success("Payment received — thank you! We'll call to confirm your delivery.");
+    } else if (params.get("canceled") === "1") {
+      toast("Payment canceled. Your order was saved — you can pay on delivery instead.");
+    }
+    if (params.get("paid") || params.get("canceled")) {
+      // Clean the URL so the toast doesn't reappear on refresh.
+      params.delete("paid");
+      params.delete("canceled");
+      params.delete("order");
+      setParams(params, { replace: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
   <Layout>
     <Helmet>
       <title>Our Drinks · KK Drinks Sierra Leone</title>
@@ -97,6 +119,7 @@ const Store = () => (
       </div>
     </section>
   </Layout>
-);
+  );
+};
 
 export default Store;
